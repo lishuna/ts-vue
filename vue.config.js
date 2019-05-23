@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-module.export = {
+module.exports = {
   publicPath: './',
   outputDir: 'dist',
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
@@ -18,8 +18,9 @@ module.export = {
     port: 3002,
     hot: true,
     before: function(app, server) {
-      app.post('*.json', function(req, res) {
-        res.json(fs.readFileSync(path.resolve(__dirname,'/mock/',req.url)));
+      app.get('*.json', function(req, res) {
+        console.log('----',__dirname,path.resolve(__dirname, './mock/'),req.url,path.resolve(__dirname, './mock', req.url));
+        res.json(fs.readFileSync(path.resolve(__dirname,'./mock/',req.url)));
       });
     }
   }

@@ -20,7 +20,7 @@ module.exports = {
     before: function(app, server) {
       app.get('*.json', function(req, res) {
         console.log('----',__dirname,path.resolve(__dirname, './mock/'),req.url,path.resolve(__dirname, './mock', req.url));
-        res.json(fs.readFileSync(path.resolve(__dirname,'./mock/',req.url)));
+        res.json(JSON.parse(fs.readFileSync(path.resolve(__dirname,'./mock/','.'+req.url))));
       });
     }
   }
